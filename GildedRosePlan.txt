@@ -26,3 +26,18 @@ if (Item.Quality < 50)
 {
 	Item.Quality++
 }
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Logique du "Backstage Pass" :
+
+switch (Item) :
+
+case Item.SellIn >
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Code refactor :
+Manque de méthodes pour améliorer la lisibilité
+Manque de commentaire pour clarifier certaines notions

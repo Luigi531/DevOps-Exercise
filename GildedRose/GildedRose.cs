@@ -29,7 +29,7 @@ public class GildedRose
                     UpdateConjured(Items[i]);
                     break;
                 default:
-                    UpdateBrie(Items[i]);
+                    BaseItemUpdate(Items[i]);
                     break;
             }
         }
@@ -38,11 +38,13 @@ public class GildedRose
     //This method implements the base logic for items handling
     private void BaseItemUpdate(Item item)
     {
+        DecrementSellIn(item);
+        
         //If the quality of an item was to be negative at the next increment, do not execute the logic
         if (item.Quality > 0)
         {
             //If the Sell Date has passed the quality is reduced by 2, otherwise it's reduce by one at the end of the day
-            item.Quality = item.SellIn < 0 ? item.Quality -= 2 : item.Quality--;
+            item.Quality -= item.SellIn < 0 ? 2 : 1;
         }
     }
     
@@ -50,6 +52,8 @@ public class GildedRose
     //The Brie Increments in Quality each day until it reaches fifty
     private void UpdateBrie(Item item)
     {
+        DecrementSellIn(item);
+        
         if (item.Quality < 50) item.Quality++;
     }
     
@@ -57,6 +61,8 @@ public class GildedRose
     //If the quality is not yet maxed out, the method checks the time left before the concert and updates it's quality according to it
     private void UpdatePass(Item item)
     {
+        DecrementSellIn(item);
+        
         if (item.Quality <= 50)
         {
             switch (item.SellIn)
@@ -77,10 +83,17 @@ public class GildedRose
     //This method handles the conjured items behaviour
     private void UpdateConjured(Item item)
     {
+        DecrementSellIn(item);
+        
         if (item.Quality > 0)
         {
             //If the Sell Date has passed the quality is reduced by 2, otherwise it's reduce by one at the end of the day
             item.Quality = item.SellIn < 0 ? item.Quality -= 4 : item.Quality -= 2;
         }
+    }
+
+    private void DecrementSellIn(Item item)
+    {
+        item.SellIn--;
     }
 }
