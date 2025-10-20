@@ -1,0 +1,28 @@
+La qualité d'un objet n'es jamais négative
+La qualité d'un objet n'est jamais plus haute que 50
+------------------------------------------------------
+Si la date de vente est dépassée : -2 qualité par jour
+Le "Aged Brie" augmente en qualité au plus on se rapproche de sa date de vente
+L'objet "Backstage passes" augmente en qualité au plus on se rapproche de sa date de vente :
+- La qualité augmente de 2 à partir de 10 jours avant le concert
+- La qualité augmente de 3 à partir de 5 jours avant le concert
+L'objet "Sulfuras" ne dois pas avoir de date de vente ni de décrémentation de sa qualité
+
+Fonctionnement du système :
+
+Logique de base :
+Chaque jour qui passe, l'objet perd en qualité jusqu'à sa date de vente. Le système décrémente les deux valeurs chaque fin de journée.
+Si la date de vente est dépassée alors l'objet se dégrade deux fois plus vite.
+
+=>
+
+Item.SellIn < 0 ? Item.Quality -= 2 : Item.Quality --;
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Logique du Brie :
+
+if (Item.Quality < 50)
+{
+	Item.Quality++
+}
